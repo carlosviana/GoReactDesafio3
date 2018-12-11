@@ -8,22 +8,22 @@ import sagas from "./sagas";
 const middlewares = [];
 
 const sagaMonitor =
-    process.env.NODE_ENV === "development"
-        ? console.tron.createSagaMonitor()
-        : null;
+  process.env.NODE_ENV === "development"
+    ? console.tron.createSagaMonitor()
+    : null;
 
 const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
 
 middlewares.push(sagaMiddleware);
 
-const createApropriateStore =
-    process.env.NODE_ENV === "development"
-        ? console.tron.createStore
-        : createStore;
+const createAppropriateStore =
+  process.env.NODE_ENV === "development"
+    ? console.tron.createStore
+    : createStore;
 
-const store = createApropriateStore(
-    reduces,
-    compose(applyMiddleware(sagaMiddleware))
+const store = createAppropriateStore(
+  reduces,
+  compose(applyMiddleware(sagaMiddleware))
 );
 
 sagaMiddleware.run(sagas);

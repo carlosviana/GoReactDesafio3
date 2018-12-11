@@ -7,6 +7,8 @@ import store from "./store";
 
 import Routes from "./routes";
 
+import "./styles/style.scss";
+
 class App extends Component {
     render() {
         return (
