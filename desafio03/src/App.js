@@ -11,9 +11,10 @@ import "./styles/style.scss";
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <Routes />
-      </Provider>
+        <Provider store={store}>
+          <Routes>
+          </Routes>
+        </Provider>
     );
   }
 }

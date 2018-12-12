@@ -5,6 +5,9 @@ import SideBar from "../../components/sidebar";
 
 import "mapbox-gl/dist/mapbox-gl.css";
 
+import GlobalStyle from '../../styles/global'
+
+
 export default class Main extends Component {
   state = {
     viewport: {
@@ -37,13 +40,14 @@ export default class Main extends Component {
 
   handleMapClick(e) {
     const [latitude, longitude] = e.lngLat;
-
+    
     alert(`Latitude: ${latitude} \nLongitude: ${longitude}`);
   }
 
   render() {
     return (
       <Fragment>
+        <GlobalStyle/>
         <div className="map">
           <MapGL
             {...this.state.viewport}
@@ -75,7 +79,7 @@ export default class Main extends Component {
           </MapGL>
         </div>
 
-        <SideBar />
+        <SideBar/>
       </Fragment>
     );
   }
