@@ -45,6 +45,8 @@ class Main extends Component {
   handleMapClick(e) {
     const [latitude, longitude] = e.lngLat;
 
+    //this.props.setLatitudeLongitudeClick({ map: latitude, longitude });
+
     alert(`Latitude: ${latitude} \nLongitude: ${longitude}`);
   }
 
@@ -66,6 +68,7 @@ class Main extends Component {
           >
             {this.props.userRepo.data.map(marker => (
               <Marker
+                key={marker.id}
                 longitude={marker.longitude}
                 latitude={marker.latitude}
                 onClick={this.handleMapClick}

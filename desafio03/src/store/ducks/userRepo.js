@@ -3,11 +3,11 @@
  */
 
 export const Types = {
-  ADD_REQUEST: "userRepos/ADD_REQUEST",
-  ADD_SUCCESS: "userRepos/ADD_SUCCESS",
-  ADD_FAILURE: "userRepos/ADD_FAILURE",
-  // GET_REPOSITORY: "userRepos/GET_REPOSITORY",
-  SET_REPOSITORY: "userRepos/SET_REPOSITORY"
+  ADD_REQUEST: "userRepo/ADD_REQUEST",
+  ADD_SUCCESS: "userRepo/ADD_SUCCESS",
+  ADD_FAILURE: "userRepo/ADD_FAILURE",
+  SET_LATITUDELONGITUDE: "userRepo/GET_REPOSITORY",
+  SET_REPOSITORY: "userRepo/SET_REPOSITORY"
 };
 
 /***
@@ -16,7 +16,11 @@ export const Types = {
 
 const INITIAL_STATE = {
   data: [],
-  repository: ""
+  repository: "",
+  map: {
+    latitude: 0,
+    longitude: 0
+  }
 };
 
 export default function userRepo(state = INITIAL_STATE, action) {
@@ -25,8 +29,8 @@ export default function userRepo(state = INITIAL_STATE, action) {
       return { ...state };
     case Types.ADD_SUCCESS:
       return { ...state, data: [...state.data, action.payload.data] };
-    // case Types.GET_REPOSITORY:
-    //   return { ...state };
+    case Types.SET_LATITUDELONGITUDE:
+      return { ...state, map: action.payload.map };
     case Types.SET_REPOSITORY:
       return { ...state, repository: action.payload.repositoryInput };
     default:
@@ -48,10 +52,10 @@ export const Creators = {
     type: Types.ADD_SUCCESS,
     payload: { data }
   }),
-  // getRepository: repository => ({
-  //   type: Types.GET_REPOSITORY,
-  //   payload: { repository }
-  // }),
+  setLatitudeLongitudeClick: map => ({
+    type: Types.SET_LATIDUDELONGITUDE,
+    payload: { map }
+  }),
 
   setRepository: repositoryInput => ({
     type: Types.SET_REPOSITORY,

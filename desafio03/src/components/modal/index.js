@@ -20,7 +20,7 @@ class ModalInt extends Component {
         <form onSubmit={this.handleRepositoryInput}>
           <input
             placeholder="Usuário no Github"
-            value={this.props.repositoryInput}
+            value={this.props.userRepo.repository}
             onChange={e => this.props.setRepository(e.target.value)}
           />
           <div className="buttons">

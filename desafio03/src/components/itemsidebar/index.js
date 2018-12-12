@@ -6,9 +6,11 @@ class ItemSideBar extends Component {
   render() {
     return (
       <Fragment>
-        <div className="item">
-          <h1>Teste</h1>
-        </div>
+        <ul className="item">
+          {this.props.userRepo.data.map(item => (
+            <li key={item.id}>{item.name}</li>
+          ))}
+        </ul>
       </Fragment>
     );
   }
