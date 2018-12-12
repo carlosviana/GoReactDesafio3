@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react";
 
-export default class ItemSideBar extends Component {
+import { connect } from "react-redux";
+
+class ItemSideBar extends Component {
   render() {
     return (
       <Fragment>
@@ -11,3 +13,8 @@ export default class ItemSideBar extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  userRepo: state.userRepo
+});
+
+export default connect(mapStateToProps)(ItemSideBar);

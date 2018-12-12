@@ -1,14 +1,17 @@
 import React, { Component, Fragment } from "react";
 import MapGL, { Marker } from "react-map-gl";
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Creators as UserRepoActions } from "../../store/ducks/userRepo";
+
 import SideBar from "../../components/sidebar";
 
 import "mapbox-gl/dist/mapbox-gl.css";
 
-import GlobalStyle from '../../styles/global'
+import GlobalStyle from "../../styles/global";
 
-
-export default class Main extends Component {
+class Main extends Component {
   state = {
     viewport: {
       width: window.innerWidth,
@@ -16,7 +19,8 @@ export default class Main extends Component {
       latitude: -23.5439948,
       longitude: -46.6065452,
       zoom: 14
-    }
+    },
+    repositoryInput: ""
   };
 
   componentDidMount() {
@@ -40,14 +44,14 @@ export default class Main extends Component {
 
   handleMapClick(e) {
     const [latitude, longitude] = e.lngLat;
-    
+
     alert(`Latitude: ${latitude} \nLongitude: ${longitude}`);
   }
 
   render() {
     return (
       <Fragment>
-        <GlobalStyle/>
+        <GlobalStyle />
         <div className="map">
           <MapGL
             {...this.state.viewport}
@@ -60,27 +64,41 @@ export default class Main extends Component {
               })
             }
           >
-            <Marker
-              latitude={-23.5439948}
-              longitude={-46.6065452}
-              onClick={this.handleMapClick}
-              captureClick
-            >
-              <img
-                alt="avatar"
-                style={{
-                  borderRadius: 100,
-                  width: 48,
-                  height: 48
-                }}
-                src="https://avatars2.githubusercontent.com/u/2254731?v=4"
-              />
-            </Marker>
+            {this.props.userRepo.data.map(marker => (
+              <Marker
+                longitude={marker.longitude}
+                latitude={marker.latitude}
+                onClick={this.handleMapClick}
+                captureClick
+              >
+                <img
+                  alt="avatar"
+                  style={{
+                    borderRadius: 100,
+                    width: 48,
+                    height: 48
+                  }}
+                  src={marker.avatar_url}
+                />
+              </Marker>
+            ))}
           </MapGL>
         </div>
 
-        <SideBar/>
+        <SideBar />
       </Fragment>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  userRepo: state.userRepo
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(UserRepoActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Main);

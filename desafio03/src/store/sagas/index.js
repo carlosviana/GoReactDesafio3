@@ -1,6 +1,6 @@
 import { all, takeLatest } from "redux-saga/effects";
 
-import { addUserRepo } from "./userRepos";
+import { addUserRepo } from "./userRepo";
 
 import { Types as UserRepoTypes } from "../ducks/userRepo";
 
