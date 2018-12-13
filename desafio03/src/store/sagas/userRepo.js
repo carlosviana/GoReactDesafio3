@@ -6,12 +6,11 @@ import { Creators as UserRepoActions } from "../../store/ducks/userRepo";
 export function* addUserRepo(action) {
   try {
     const { data } = yield call(api.get, `/users/${action.payload.repository}`);
-    const { map } = action.payload.repository;
     const repositoryData = {
       id: data.id,
       avatar_url: data.avatar_url,
-      latitude: map.latitude,
-      longitude: map.longitude,
+      latitude: data.latitude,
+      longitude: data.longitude,
       name: data.login
     };
 

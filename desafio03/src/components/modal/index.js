@@ -4,12 +4,13 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { Creators as UserRepoActions } from "../../store/ducks/userRepo";
+import { Creators as InterfacerActions } from "../../store/ducks/interfacer";
 
 class ModalInt extends Component {
   handleRepositoryInput = event => {
     event.preventDefault();
-    console.log(this.props.userRepo.repository);
-    this.props.addUserRepoRequest(this.props.userRepo.repository);
+    console.log(this.props.interfacer.repository);
+    this.props.addUserRepoRequest(this.props.interfacer.repository);
     this.props.setRepository("");
   };
 
@@ -20,7 +21,7 @@ class ModalInt extends Component {
         <form onSubmit={this.handleRepositoryInput}>
           <input
             placeholder="Usuário no Github"
-            value={this.props.userRepo.repository}
+            value={this.props.interfacer.repository}
             onChange={e => this.props.setRepository(e.target.value)}
           />
           <div className="buttons">
@@ -36,11 +37,12 @@ class ModalInt extends Component {
 }
 
 const mapStateToProps = state => ({
-  userRepo: state.userRepo
+  userRepo: state.userRepo,
+  interfacer: state.interfacer
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(UserRepoActions, dispatch);
+  bindActionCreators(UserRepoActions, InterfacerActions, dispatch);
 
 export default connect(
   mapStateToProps,

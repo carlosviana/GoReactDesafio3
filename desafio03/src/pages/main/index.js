@@ -4,6 +4,7 @@ import MapGL, { Marker } from "react-map-gl";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Creators as UserRepoActions } from "../../store/ducks/userRepo";
+import { Creators as InterfacerActions } from "../../store/ducks/interfacer";
 
 import SideBar from "../../components/sidebar";
 
@@ -95,11 +96,12 @@ class Main extends Component {
 }
 
 const mapStateToProps = state => ({
-  userRepo: state.userRepo
+  userRepo: state.userRepo,
+  interfacer: state.interfacer
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(UserRepoActions, dispatch);
+  bindActionCreators(UserRepoActions, InterfacerActions, dispatch);
 
 export default connect(
   mapStateToProps,
